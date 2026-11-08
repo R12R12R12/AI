@@ -92,6 +92,28 @@ import time
 from collections import Counter, defaultdict, deque
 from datetime import datetime, timedelta
 
+
+def ensure_packages():
+    """Если на сервере нет библиотек — ставит их сам (torch — лёгкая CPU-версия)."""
+    import importlib.util
+    import subprocess
+    need = [m for m in ("torch", "aiogram", "numpy") if importlib.util.find_spec(m) is None]
+    if not need:
+        return
+    print("Устанавливаю библиотеки:", ", ".join(need), flush=True)
+    pip = [sys.executable, "-m", "pip", "install", "--no-cache-dir"]
+    if subprocess.call([sys.executable, "-m", "pip", "--version"]) != 0:
+        subprocess.check_call([sys.executable, "-m", "ensurepip", "--upgrade"])
+    if "torch" in need:
+        subprocess.check_call(pip + ["torch", "--index-url", "https://download.pytorch.org/whl/cpu"])
+    rest = [m for m in need if m != "torch"]
+    if rest:
+        subprocess.check_call(pip + rest)
+    importlib.invalidate_caches()
+
+
+ensure_packages()
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
