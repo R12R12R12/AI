@@ -14,7 +14,7 @@ NeuroBot — своя текстовая нейросеть (GPT-трансфо�
 
 Запуск:
   pip install aiogram torch
-  python3 neurobot.py
+  python3 server.py
 
 Хочешь, чтобы нейросеть стала умнее — положи любые .txt (книги, диалоги, статьи)
 в папку data/corpus рядом с этим файлом или просто отправь .txt файл боту (от админа).
@@ -24,14 +24,14 @@ NeuroBot — своя текстовая нейросеть (GPT-трансфо�
 
 BOT_TOKEN = "9284721323:AAHOXVayZI0mezrjPi1Thgg7WyjAQ_N7m40"
 ADMIN_IDS = [5796754554]            # Telegram ID админов (свой ID можно узнать у @userinfobot)
-BOT_NAME = "Нейро_AI"
+BOT_NAME = "Нейро"
 
 # Лимиты и подписка (оплата в Telegram Stars ⭐)
 FREE_MESSAGES_PER_DAY = 20          # сколько сообщений в день без подписки
 SUBSCRIPTION_PLANS = {
-    "week":  {"title": "2 Недели", "days": 14,   "stars": 50},
+    "week":  {"title": "Неделя", "days": 7,   "stars": 50},
     "month": {"title": "Месяц",  "days": 30,  "stars": 150},
-    "year":  {"title": "Год",    "days": 365, "stars": 1000},
+    "year":  {"title": "Год",    "days": 365, "stars": 1200},
 }
 FLOOD_DELAY_SEC = 1.0               # минимальная пауза между сообщениями одного пользователя
 
