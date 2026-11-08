@@ -1275,7 +1275,8 @@ async def admin_document(m: Message):
     if not name.lower().endswith(".txt"):
         await m.answer("Принимаю только .txt файлы для обучения")
         return
-    path = os.path.join(CORPUS_DIR, f"{int(time.time())}_{re.sub(r'[^\w.-]', '_', name)}")
+    safe_name = re.sub(r"[^\w.-]", "_", name)
+    path = os.path.join(CORPUS_DIR, f"{int(time.time())}_{safe_name}")
     await m.bot.download(m.document, destination=path)
     brain.train_now.set()
     await m.answer(f"📚 Файл добавлен в корпус. Запускаю дообучение в фоне.\n"
